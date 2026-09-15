@@ -1,11 +1,11 @@
 {
   "name": "ghost-blog",
-  "version": "1.9.0",
-  "description": "Manage your Ghost blog directly from Claude Code: create, update, publish, schedule posts, upload images, manage tags, members, and newsletters",
+  "version": "1.10.0",
+  "description": "Manage your Ghost blog: create, update, publish, schedule posts, upload images, manage tags, members, and newsletters",
   "author": {
     "name": "George Guimaraes"
   },
-  "homepage": "https://github.com/georgeguimaraes/claude-code-ghost",
+  "homepage": "https://github.com/georgeguimaraes/ghost-agent-tools",
   "license": "MIT",
   "keywords": [
     "ghost",

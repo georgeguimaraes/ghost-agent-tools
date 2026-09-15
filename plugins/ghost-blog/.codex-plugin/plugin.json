@@ -1,0 +1,20 @@
+{
+  "name": "ghost-blog",
+  "version": "1.10.0",
+  "description": "Manage your Ghost blog: create, update, publish, schedule posts, upload images, manage tags, members, and newsletters",
+  "author": {
+    "name": "George Guimaraes"
+  },
+  "homepage": "https://github.com/georgeguimaraes/ghost-agent-tools",
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Ghost Blog",
+    "shortDescription": "Manage Ghost posts, images, and newsletters",
+    "longDescription": "Read, draft, edit, publish, and schedule Ghost posts with shared Python helpers for the Content and Admin APIs.",
+    "developerName": "George Guimaraes",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": "List my recent Ghost blog posts."
+  }
+}

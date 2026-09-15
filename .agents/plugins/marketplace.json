@@ -1,0 +1,20 @@
+{
+  "name": "ghost-agent-tools",
+  "interface": {
+    "displayName": "Ghost Agent Tools"
+  },
+  "plugins": [
+    {
+      "name": "ghost-blog",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ghost-blog"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

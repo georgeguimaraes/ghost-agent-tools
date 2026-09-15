@@ -1,6 +1,6 @@
 ---
 name: ghost-blog
-description: "This skill should be used when the user wants to interact with a Ghost blog via its Content and Admin APIs. Relevant when the user says things like 'list my blog posts', 'create a new draft', 'publish my draft', 'schedule a post for tomorrow', 'upload an image to my blog', 'manage blog tags', 'show my Ghost site info', 'filter posts by tag', 'delete a post', 'list members', 'send a newsletter', or any Ghost blog management task involving posts, pages, tags, members, newsletters, tiers, or images."
+description: "Manage Ghost CMS blogs through the Content and Admin APIs. Use for reading, creating, editing, publishing, or scheduling posts and pages, uploading images, and managing tags, members, and newsletters."
 ---
 
 # Ghost Blog Management
@@ -21,10 +21,11 @@ These are created in Ghost Admin under Settings > Integrations > Custom Integrat
 
 All operations use the `Ghost` class from `ghost_api.py` (stdlib only, no dependencies). It handles JWT auth, JSON serialization, and HTTP requests. The module lives in the same directory as this skill file.
 
-**Every script follows this pattern** (use the base directory shown when this skill is loaded as the PYTHONPATH):
+Requires [uv](https://docs.astral.sh/uv/). Resolve `GHOST_SKILL_DIR` to the absolute directory containing this `SKILL.md`, wherever the skill is installed. Both Python helpers live beside it. Use that path rather than the working directory:
 
 ```bash
-PYTHONPATH=<base_directory_of_this_skill> python3 << 'PY'
+GHOST_SKILL_DIR="/absolute/path/to/ghost-blog"
+PYTHONPATH="$GHOST_SKILL_DIR" uv run --no-project python - << 'PY'
 from ghost_api import Ghost
 
 g = Ghost()
@@ -332,10 +333,10 @@ For editing posts as markdown instead of HTML, use `ghost_md.py` (requires [uv](
 
 ```bash
 # Pull a post as markdown
-<base_directory_of_this_skill>/ghost_md.py pull POST_ID /tmp/post.md
+uv run --no-project --with markdownify --with markdown "$GHOST_SKILL_DIR/ghost_md.py" pull POST_ID /tmp/post.md
 
 # Edit the markdown file, then push it back
-<base_directory_of_this_skill>/ghost_md.py push POST_ID /tmp/post.md
+uv run --no-project --with markdownify --with markdown "$GHOST_SKILL_DIR/ghost_md.py" push POST_ID /tmp/post.md
 ```
 
 This is the **preferred workflow for editing post content**. Pull the post as markdown, edit the `.md` file using standard text editing tools, then push it back. Ghost receives HTML converted from the markdown.
@@ -368,7 +369,7 @@ Ghost stores this as a single opaque HTML card and won't convert it to Lexical n
 
 ## Guidelines
 
-1. **Always use the `PYTHONPATH=... python3 << 'PY'` pattern** for all Ghost API operations
+1. **Use the skill-relative commands above** so helpers work from any directory
 2. **Use `ghost_md.py pull/push` for editing post content** as markdown
 3. **Use the Admin API** for writes and drafts; Content API for simple public reads
 4. **Always GET before PUT** to obtain `updated_at` for collision detection
